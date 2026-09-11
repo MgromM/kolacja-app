@@ -62,11 +62,31 @@
   .icon svg{ display:block; width:100%; height:100%; }
   button .icon{ pointer-events:none; }
   body{
-    background:var(--paper);
+    background:
+      linear-gradient(180deg, rgba(7,26,36,.94), rgba(7,26,36,.97)),
+      url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Funny_Car_burnout_%40_Hockenheim.JPG/960px-Funny_Car_burnout_%40_Hockenheim.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
     font-size:15px;
     line-height:1.5;
+  }
+  .e36-photo{
+    border-radius:12px;
+    border:2px solid var(--both-line);
+    object-fit:cover;
+    display:block;
+  }
+  .header-e36{
+    width:56px; height:56px; border-radius:50%;
+    object-fit:cover; border:2px solid var(--both-line);
+    flex:none;
+  }
+  .header-row{ display:flex; align-items:center; gap:14px; }
+  .drift-banner{
+    width:100%; height:140px; margin:18px 0;
   }
   .wrap{
     max-width:980px;
@@ -743,10 +763,15 @@
 
 <div class="wrap">
   <header>
-    <h1>Termin na kolację</h1>
-    <p class="drift-subtitle">🏎️⏱️ klimat drifterskich zegarów E36</p>
+    <div class="header-row">
+      <img class="header-e36" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/BMW-E36-sedan.jpg/960px-BMW-E36-sedan.jpg" alt="BMW E36" loading="lazy">
+      <h1>Termin na kolację</h1>
+    </div>
     <p class="greeting" id="greeting" hidden></p>
   </header>
+
+  <img class="e36-photo drift-banner" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/BMW_E36_325i_1993_front.jpg/960px-BMW_E36_325i_1993_front.jpg" alt="BMW E36 325i" loading="lazy" style="width:100%;object-position:center 30%;">
+
 
   <div class="offline-pill" id="offlinePill" hidden>
     Offline — pokazujemy ostatnio zapisane dane. Zmiany zapiszą się, gdy wróci internet.
@@ -785,12 +810,6 @@
 
   <div class="grid">
     <div>
-      <div class="card distance-card" id="distanceCard" hidden>
-        <h2>Odległość między wami</h2>
-        <div id="distanceBody"></div>
-        <div class="distance-map" id="distanceMap" hidden></div>
-      </div>
-
       <div class="card">
         <h2>Najbliższe wolne wieczory (oboje)</h2>
         <div class="free-list" id="freeList"></div>
@@ -883,7 +902,7 @@
 
   <footer class="page-footer">
     <span class="footer-hint">tutaj nic ciekawego nie ma →</span>
-    <a href="game/index.html" class="footer-easter-egg" title="E36 czeka w garażu">🏎️</a>
+    <a href="game/index.html" class="footer-easter-egg" title="E36 czeka w garażu"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Blue_BMW_E36.JPG/330px-Blue_BMW_E36.JPG" alt="BMW E36" style="width:28px;height:20px;object-fit:cover;border-radius:4px;vertical-align:middle;" loading="lazy"></a>
   </footer>
 </div>
 
@@ -895,12 +914,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBlAjb5gNcZfaHMBKglquZ4JD3lhBs1tao",
-  authDomain: "oba-wolne.firebaseapp.com",
-  projectId: "oba-wolne",
-  storageBucket: "oba-wolne.firebasestorage.app",
-  messagingSenderId: "542262689847",
-  appId: "1:542262689847:web:af9c318aa74843d8ab3fb2"
+  apiKey: "AIzaSyBkd0suxA8BRUFpuvldJ1rpu7C-P6Obhvg",
+  authDomain: "filip-51ee4.firebaseapp.com",
+  projectId: "filip-51ee4",
+  storageBucket: "filip-51ee4.firebasestorage.app",
+  messagingSenderId: "106089072016",
+  appId: "1:106089072016:web:5d9cdb09fedf45b41b1f15"
 };
 const fbApp = initializeApp(firebaseConfig);
 const firestore = getFirestore(fbApp);
@@ -990,7 +1009,7 @@ function updateGreeting(){
   const isEvening = hour >= 18 || hour < 5;
   const word = isEvening ? 'Dobry wieczór' : 'Dzień dobry';
   const emoji = isEvening ? '🌙' : '☀️';
-  el.textContent = `${word}, ${PERSON_NAMES.ona} ${emoji}`;
+  el.textContent = `${word}, parówiaku ${emoji}`;
   el.hidden = false;
 }
 
@@ -1155,35 +1174,7 @@ function renderDistanceMap(a, b){
 }
 
 function renderDistance(){
-  const card = document.getElementById('distanceCard');
-  const body = document.getElementById('distanceBody');
-  const mapEl = document.getElementById('distanceMap');
-  const a = effectiveLocation('michal');
-  const b = effectiveLocation('ona');
-  if(!a || !b){
-    card.hidden = true;
-    mapEl.hidden = true;
-    if(distanceMapInstance){ distanceMapInstance.remove(); distanceMapInstance = null; }
-    lastDistanceKey = null;
-    return;
-  }
-  const km = haversineKm(a, b);
-  card.hidden = false;
-  body.innerHTML = `
-    <div class="distance-km">${km} km</div>
-    <div class="distance-meta">${PERSON_NAMES.michal}: ${escapeHtml(a.label || '?')} · ${PERSON_NAMES.ona}: ${escapeHtml(b.label || '?')}</div>
-  `;
-  // Rebuilding the Leaflet map re-fetches every OSM tile over the network — skip it
-  // when the two locations haven't actually moved since the last render.
-  const key = `${a.lat},${a.lon}|${b.lat},${b.lon}`;
-  if(key === lastDistanceKey) return;
-  lastDistanceKey = key;
-  ensureDistanceMapObserver();
-  if(distanceMapVisible){
-    renderDistanceMap(a, b);
-  }else{
-    pendingDistanceCoords = { a, b };
-  }
+  // Filip i Nina mieszkają razem w Warszawie — karta odległości/mapy jest wyłączona.
 }
 
 function seasonInfo(){
