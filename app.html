@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<title>Termin na kolację</title>
+<title>Termin na kolację 🏎️ E36</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="icons/favicon-32-v2.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon-v2.png">
@@ -12,48 +12,48 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --paper:#faf6f0;
+    --paper:#eaf7f6;
     --paper-raised:#ffffff;
-    --ink:#2b2630;
-    --ink-soft:#6b6270;
-    --line:#e7ddd0;
-    --michal:#2f6f62;
-    --michal-bg:#e3efe9;
-    --ona:#b8365f;
-    --ona-bg:#f8e6ec;
-    --both-bg:#fff2c7;
-    --both-line:#d8ab2b;
+    --ink:#0f2b31;
+    --ink-soft:#3f6b74;
+    --line:#bfe6e2;
+    --michal:#0f9b8e;
+    --michal-bg:#d3f3ee;
+    --ona:#0e6ba8;
+    --ona-bg:#dceefc;
+    --both-bg:#c8f2ea;
+    --both-line:#14b8a6;
     --danger:#b8365f;
-    --shadow: 0 1px 2px rgba(43,38,48,.06), 0 6px 20px rgba(43,38,48,.06);
+    --shadow: 0 1px 2px rgba(15,43,49,.08), 0 6px 20px rgba(15,43,49,.08);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#1c1a1f;
-      --paper-raised:#262330;
-      --ink:#ede8f0;
-      --ink-soft:#a89fb0;
-      --line:#3a3542;
-      --michal:#6fcbb3;
-      --michal-bg:#22332e;
-      --ona:#f292b3;
-      --ona-bg:#3a2530;
-      --both-bg:#4a3d1a;
-      --both-line:#c9a331;
+      --paper:#071a24;
+      --paper-raised:#0d2833;
+      --ink:#e3fbf7;
+      --ink-soft:#7fc9c0;
+      --line:#134656;
+      --michal:#2dd4bf;
+      --michal-bg:#0d3a35;
+      --ona:#38bdf8;
+      --ona-bg:#0d2f42;
+      --both-bg:#0d3a35;
+      --both-line:#2dd4bf;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
     }
   }
   :root[data-theme="dark"]{
-    --paper:#1c1a1f;
-    --paper-raised:#262330;
-    --ink:#ede8f0;
-    --ink-soft:#a89fb0;
-    --line:#3a3542;
-    --michal:#6fcbb3;
-    --michal-bg:#22332e;
-    --ona:#f292b3;
-    --ona-bg:#3a2530;
-    --both-bg:#4a3d1a;
-    --both-line:#c9a331;
+    --paper:#071a24;
+    --paper-raised:#0d2833;
+    --ink:#e3fbf7;
+    --ink-soft:#7fc9c0;
+    --line:#134656;
+    --michal:#2dd4bf;
+    --michal-bg:#0d3a35;
+    --ona:#38bdf8;
+    --ona-bg:#0d2f42;
+    --both-bg:#0d3a35;
+    --both-line:#2dd4bf;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
   }
 
@@ -92,6 +92,11 @@
     margin:0;
     color:var(--ink-soft);
     font-size:14.5px;
+  }
+  .drift-subtitle{
+    color:var(--both-line) !important;
+    font-weight:600;
+    letter-spacing:.02em;
   }
   .greeting{
     font-family:'Fraunces', Georgia, serif;
@@ -739,6 +744,7 @@
 <div class="wrap">
   <header>
     <h1>Termin na kolację</h1>
+    <p class="drift-subtitle">🏎️⏱️ klimat drifterskich zegarów E36</p>
     <p class="greeting" id="greeting" hidden></p>
   </header>
 
@@ -748,8 +754,8 @@
 
   <div class="whoami">
     <span>Jesteś:</span>
-    <button class="who-btn" data-person="michal" id="btn-michal">Michał</button>
-    <button class="who-btn" data-person="ona" id="btn-ona">Aga</button>
+    <button class="who-btn" data-person="michal" id="btn-michal">Filip</button>
+    <button class="who-btn" data-person="ona" id="btn-ona">Nina</button>
     <button type="button" class="city-pill" id="changeCityBtn" hidden><span class="icon" style="width:11px;height:11px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.686-7-11a7 7 0 0 1 14 0c0 5.314-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span> Ustaw miasto</button>
   </div>
 
@@ -866,8 +872,8 @@
       <div class="day-popover" id="dayPopover" hidden></div>
       <div class="legend">
         <span><i class="free"></i>oboje wolni</span>
-        <span><i class="michal"></i>Michał zajęty</span>
-        <span><i class="ona"></i>Aga zajęta</span>
+        <span><i class="michal"></i>Filip zajęty</span>
+        <span><i class="ona"></i>Nina zajęta</span>
         <span><i class="both"></i>oboje zajęci</span>
         <span><i class="planned"></i>zaplanowana / proponowana kolacja</span>
         <span><i class="today"></i>dziś</span>
@@ -877,7 +883,7 @@
 
   <footer class="page-footer">
     <span class="footer-hint">tutaj nic ciekawego nie ma →</span>
-    <a href="game/index.html" class="footer-easter-egg" title="Nudzi się?">🏀</a>
+    <a href="game/index.html" class="footer-easter-egg" title="E36 czeka w garażu">🏎️</a>
   </footer>
 </div>
 
@@ -905,7 +911,8 @@ const ideasCol = collection(firestore, 'place_ideas');
 let confirmed = null;
 let ideas = [];
 let ideasLoaded = false;
-const PERSON_NAMES = { michal: 'Michał', ona: 'Aga' };
+const PERSON_NAMES = { michal: 'Filip', ona: 'Nina' };
+const BUSY_JOKES = { michal: 'naprawia E36 Groma', ona: 'pije' };
 
 const POLISH_CITIES = [
   'Warszawa','Kraków','Łódź','Wrocław','Poznań','Gdańsk','Szczecin','Bydgoszcz','Lublin','Białystok',
@@ -1467,8 +1474,8 @@ function renderWeekStrip(){
   }).join('');
   document.getElementById('weekStrip').innerHTML = `
     <div></div>${headRow}
-    <div class="row-label"><span class="avatar" style="background:var(--michal)">M</span>${PERSON_NAMES.michal}</div>${personRow('michal', 'free')}
-    <div class="row-label"><span class="avatar" style="background:var(--ona)">A</span>${PERSON_NAMES.ona}</div>${personRow('ona', 'ona-free')}
+    <div class="row-label"><span class="avatar" style="background:var(--michal)">F</span>${PERSON_NAMES.michal}</div>${personRow('michal', 'free')}
+    <div class="row-label"><span class="avatar" style="background:var(--ona)">N</span>${PERSON_NAMES.ona}</div>${personRow('ona', 'ona-free')}
     <div class="row-label"><span class="avatar both-avatar">${ICON_UTENSILS}</span>Oboje</div>${mergedRow}
   `;
   if(confirmed){
@@ -1969,7 +1976,7 @@ function showDayPopover(dayEl){
     const busy = isBusy(p, ymd);
     const t = busy ? trips.find(tr=>tr.person===p && ymd>=tr.start && ymd<=tr.end) : null;
     const loc = effectiveLocationOnDate(p, ymd);
-    const locText = t && t.loc ? escapeHtml(t.loc) : (loc ? escapeHtml(loc.label || '?') : 'brak podanego miasta');
+    const locText = t && t.loc ? escapeHtml(t.loc) : (loc ? escapeHtml(loc.label || '?') : (busy ? BUSY_JOKES[p] : 'brak podanego miasta'));
     rows.push(`<div class="day-popover-row"><span class="dot ${p}"></span><span class="day-popover-name">${PERSON_NAMES[p]}:</span><span class="day-popover-loc">${locText}</span></div>`);
   });
   const locMichal = effectiveLocationOnDate('michal', ymd);
